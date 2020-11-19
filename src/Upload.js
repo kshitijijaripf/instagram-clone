@@ -44,7 +44,7 @@ function Upload() {
     <div>
        <div 
       className={`card ${flip ? 'flip' : ''}`}
-      
+      onClick={deletes}
       >
            <div className = 'front'>
               <h1>Front</h1>
@@ -72,9 +72,6 @@ function Upload() {
         value={username}
       />
       <Button onClick={handleUpload}>Upload</Button>
-      <Button onClick={deletes}>Delete</Button>
-      
-
     </div>
   );
 }
