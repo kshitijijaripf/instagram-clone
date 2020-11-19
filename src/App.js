@@ -1,23 +1,26 @@
-import logo from './logo.svg';
+import React,{useState,useEffect} from 'react'
+import Post from './Post'
 import './App.css';
+import {db} from './firebase';
+import Upload from './Upload';
+
 
 function App() {
+  
+  const [flip,setFlip]=useState(false);
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+        <div className="app__header">
+          <img
+            className="app__headerimg"
+            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP._9lt8FcexKeclAErsTfp5wHaCv%26pid%3DApi&f=1"
+            alt=""
+          />
+        </div>
+        <Upload />
     </div>
   );
 }
