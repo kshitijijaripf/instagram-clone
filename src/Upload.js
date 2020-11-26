@@ -1,5 +1,4 @@
 import React, { useState,useEffect } from "react";
-import { Button } from "@material-ui/core";
 import {  db } from "./firebase";
 import Post from './Post';
 
@@ -10,21 +9,16 @@ function Upload() {
   const [flip,setFlip]=useState(false)
 
   useEffect(()=>{
+   
     db.collection('posts').onSnapshot(snapshot =>{
-      setPosts(snapshot.docs.map(doc => doc.data()))
+      if(snapshot.docs.length == 0){
+        console.log('empty')
+      }else{
+        setFlip(!flip)
+      }
+      setPosts(snapshot.docs.map(doc => doc.data()))      
     })
   },[]);
-
-  const handleUpload = () => {
-    setFlip(!flip)
-    db.collection("posts").add({
-      caption: caption,
-      username: username,
-    });
-    setCaption("");
-    setUsername("");
-  };
-
 
   const deletes = () => {
     setFlip(!flip)
@@ -34,11 +28,8 @@ function Upload() {
         res.forEach((element) => {
           element.ref.delete();
         });
-      });
+      }); 
   };
-
-   
-
 
   return (
     <div>
@@ -49,31 +40,21 @@ function Upload() {
            <div className = 'front'>
               <h1>Front</h1>
            </div>
-           <div className = 'back' >
+           <div className = 'back'  >
            {
           posts.map(post =>(
-          <Post  caption={post.caption} username ={post.username} />
+          <Post caption={post.caption} username ={post.username} />
            ))
            }
          </div>
 
         </div>
-      <input
-        type="text"
-        placeholder="Enter a caption"
-        onChange={(event) => setCaption(event.target.value)}
-        value={caption}
-      />
-
-      <input
-        type="text"
-        placeholder="Enter a username"
-        onChange={(event) => setUsername(event.target.value)}
-        value={username}
-      />
-      <Button onClick={handleUpload}>Upload</Button>
     </div>
   );
 }
 
 export default Upload;
+
+
+
+

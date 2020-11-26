@@ -7,7 +7,7 @@ import Upload from './Upload';
 
 function App() {
   
-  const [flip,setFlip]=useState(false);
+  
 
 
 
